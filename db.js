@@ -1,58 +1,14 @@
-export const videos = [
-  {
-    id: 324393,
-    title: "Video awesome",
-    description: "This is something I love",
-    views: 24,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+import mongoose from "mongoose";
 
-    creator: {
-      id: 121212,
-      name: "Nicolas",
-      email: "nico@las.com"
-    }
-  },
-  {
-    id: 1212121,
-    title: "Video super",
-    description: "This is something I love",
-    views: 24,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+mongoose.connect("mongodb://localhost:27017/j-tube", {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
 
-    creator: {
-      id: 121212,
-      name: "Nicolas",
-      email: "nico@las.com"
-    }
-  },
-  {
-    id: 55555,
-    title: "Video nice",
-    description: "This is something I love",
-    views: 24,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+const db = mongoose.connection;
 
-    creator: {
-      id: 121212,
-      name: "Nicolas",
-      email: "nico@las.com"
-    }
-  },
-  {
-    id: 11111,
-    title: "Video perfect",
-    description: "This is something I love",
-    views: 24,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+const handleOpen = () => console.log("Connected to DB");
+const handleError = error => console.log("Error on DB Connection");
 
-    creator: {
-      id: 121212,
-      name: "Nicolas",
-      email: "nico@las.com"
-    }
-  }
-];
+db.once("open", handleOpen);
+db.on("error", handleError);
