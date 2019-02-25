@@ -59,4 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+# FuseBox cache
+.fusebox/
 package-lock.json
+videos
