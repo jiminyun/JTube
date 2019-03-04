@@ -2,15 +2,27 @@ import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    avatarUrl: String,
-    facebookId: Number,
-    githugId: Number
+  name: String,
+  email: String,
+  avatarUrl: String,
+  facebookId: Number,
+  githugId: Number,
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }]
 });
 
-UserSchema.plugin(passportLocalMongoose, { usernameField : "email"})
+UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
+UserSchema.statics.serializeUser = function() {
+  return function(user, cb) {
+    cb(null, user.id);
+  };
+};
 
-const model = mongoose.model("User", UserSchema) ;
+UserSchema.statics.deserializeUser = function() {
+  const self = this;
+  return (id, cb) => self.findById(id, cb);
+};
 
-export default model ;
+const model = mongoose.model("User", UserSchema);
+
+export default model;
