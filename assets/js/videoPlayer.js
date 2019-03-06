@@ -9,6 +9,13 @@ const volumeRange = document.getElementById("jsVolume");
 
 let intervalId = null;
 
+const registerView = () => {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "POST"
+  });
+};
+
 function handlePlayClick() {
   console.log("play");
   if (videoPlayer.paused) {
@@ -92,6 +99,7 @@ function setTotalTime() {
 }
 
 function handleEnded() {
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }

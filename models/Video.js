@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const VideoShema = new mongoose.Schema({
+  views: {
+    type: Number,
+    default: 0
+  },
   fileUrl: {
     type: String,
     required: "FILE URL is required"
@@ -10,10 +14,6 @@ const VideoShema = new mongoose.Schema({
     required: "Title is required"
   },
   description: String,
-  views: {
-    tpye: Number,
-    default: 0
-  },
   createAt: {
     type: Date,
     default: Date.now
