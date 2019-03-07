@@ -512,7 +512,9 @@ input {
   -webkit-align-items: center;
      -moz-box-align: center;
       -ms-flex-align: center;
-          align-items: center; }
+          align-items: center;
+  background-color: white;
+  padding: 50px; }
   .video-detail__container .video__info {
     width: 100%;
     max-width: 850px;
@@ -535,20 +537,27 @@ input {
     .video-detail__container .video__info .video__description {
       font-size: 16px; }
   .video-detail__container .video__comments {
+    width: 96%;
     margin-top: 25px;
-    text-align: center; }
+    text-align: left;
+    font-size: 20px; }
     .video-detail__container .video__comments .video__comment-number {
-      font-size: 18px; }
+      font-size: 20px; }
     .video-detail__container .video__comments .add__comment {
       margin-top: 25px;
       margin-bottom: 25px;
       width: 100%; }
       .video-detail__container .video__comments .add__comment input {
-        width: 100%; }
+        font-size: 20px;
+        height: 40px;
+        width: 100%;
+        border-bottom: 1px solid grey; }
     .video-detail__container .video__comments .video__comments-list {
+      font-size: 18px;
+      list-style-type: none;
+      width: 100%;
       margin-top: 50px; }
       .video-detail__container .video__comments .video__comments-list li {
-        background-color: #3498db;
         color: white;
         padding: 15px;
         -webkit-border-radius: 20px;
@@ -557,6 +566,25 @@ input {
         -webkit-border-bottom-left-radius: 0px;
            -moz-border-radius-bottomleft: 0px;
                 border-bottom-left-radius: 0px; }
+        .video-detail__container .video__comments .video__comments-list li span {
+          color: black;
+          display: block; }
+        .video-detail__container .video__comments .video__comments-list li .avatar {
+          float: left;
+          width: 50px;
+          margin-right: 20px;
+          -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+                  border-radius: 50%; }
+        .video-detail__container .video__comments .video__comments-list li .username {
+          font-size: 15px;
+          font-weight: bold; }
+        .video-detail__container .video__comments .video__comments-list li .comment {
+          margin-top: 5px;
+          color: grey; }
+        .video-detail__container .video__comments .video__comments-list li button {
+          width: 8%;
+          float: right; }
         .video-detail__container .video__comments .video__comments-list li:not(:last-child) {
           margin-bottom: 15px; }
 

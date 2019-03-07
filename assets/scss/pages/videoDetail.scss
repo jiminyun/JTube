@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+  padding: 50px;
+
   .video__info {
     width: 100%;
     max-width: 850px;
@@ -33,27 +36,57 @@
     }
   }
   .video__comments {
+    width: 96%;
     margin-top: 25px;
-    text-align: center;
+    text-align: left;
+    font-size: 20px;
     .video__comment-number {
-      font-size: 18px;
+      font-size: 20px;
     }
     .add__comment {
       margin-top: 25px;
       margin-bottom: 25px;
       width: 100%;
       input {
+        font-size: 20px;
+        height: 40px;
         width: 100%;
+        border-bottom: 1px solid grey;
       }
     }
     .video__comments-list {
+      font-size: 18px;
+      list-style-type: none;
+      width: 100%;
       margin-top: 50px;
       li {
-        background-color: #3498db;
+        // background-color: #3498db;
         color: white;
         padding: 15px;
         border-radius: 20px;
         border-bottom-left-radius: 0px;
+        span {
+          color: black;
+          display: block;
+        }
+        .avatar {
+          float: left;
+          width: 50px;
+          margin-right: 20px;
+          border-radius: 50%;
+        }
+        .username {
+          font-size: 15px;
+          font-weight: bold;
+        }
+        .comment {
+          margin-top: 5px;
+          color: grey;
+        }
+        button {
+          width: 8%;
+          float: right;
+        }
         &:not(:last-child) {
           margin-bottom: 15px;
         }

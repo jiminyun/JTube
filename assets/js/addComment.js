@@ -3,18 +3,40 @@ import axios from "axios";
 const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
+const deleteCommentForm = document.getElementsByClassName("jsDeleteComment");
 
-const increaseNumber = () => {
-  commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+const setNumber = mod => {
+  let newNumber = 0;
+  if (mod === "plus") newNumber = parseInt(commentNumber.innerHTML, 10) + 1;
+  else newNumber = parseInt(commentNumber.innerHTML, 10) - 1;
+
+  commentNumber.innerHTML = newNumber;
 };
 
-const addComment = comment => {
+const addComment = (comment, commentId, creatorName) => {
   const li = document.createElement("li");
-  const span = document.createElement("span");
-  span.innerHTML = comment;
-  li.appendChild(span);
+  const span_name = document.createElement("span");
+  const span_comment = document.createElement("span");
+  const button = document.createElement("button");
+  button.innerHTML = "Delete";
+  button.id = commentId;
+  button.className = "jsDeleteComment";
+  span_name.className = "username";
+  span_comment.className = "comment";
+  span_name.innerHTML = creatorName;
+  span_comment.innerHTML = comment;
+  li.appendChild(span_name);
+  li.appendChild(span_comment);
+  li.appendChild(button);
   commentList.prepend(li);
-  increaseNumber();
+  setNumber("plus");
+  init();
+};
+
+const delComment = commentId => {
+  const li = document.getElementById(commentId).parentNode;
+  commentList.removeChild(li);
+  setNumber("minus");
 };
 
 const sendComment = async comment => {
@@ -26,9 +48,11 @@ const sendComment = async comment => {
       comment
     }
   });
-  //console.log()
   if (response.status === 200) {
-    addComment(comment);
+    const {
+      data: { id, name }
+    } = response;
+    addComment(comment, id, name);
   }
 };
 
@@ -40,8 +64,27 @@ const handleSubmit = event => {
   commentInput.value = "";
 };
 
+const handleDelete = async event => {
+  const {
+    target: { id: commentId }
+  } = event;
+
+  const response = await axios({
+    url: `/api/${commentId}/delete-comment`,
+    method: "POST"
+  });
+
+  if (response.status === 200) {
+    delComment(commentId);
+  }
+};
+
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
+  //deleteComment.addEventListener("click", handleDelete);
+  for (let i = 0; i < deleteCommentForm.length; i++) {
+    deleteCommentForm[i].addEventListener("click", handleDelete);
+  }
 }
 
 if (addCommentForm) {
