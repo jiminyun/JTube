@@ -2,7 +2,7 @@ import Video from "../models/Video";
 import Comment from "../models/Comment";
 import User from "../models/User";
 import routes from "../routes";
-
+import aws from "aws-sdk";
 // Home
 
 export const home = async (req, res) => {
@@ -42,13 +42,13 @@ export const getUpload = (req, res) =>
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path }
+    file: { location }
   } = req;
 
-  console.log(title, description, path);
+  //console.log(title, description, location);
   // To Do: Upload and save video
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id
@@ -56,7 +56,7 @@ export const postUpload = async (req, res) => {
   //save into user
   req.user.videos.push(newVideo.id);
   req.user.save();
-  console.log(newVideo);
+  //console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
@@ -114,6 +114,33 @@ export const postEditVideo = async (req, res) => {
   }
 };
 
+export const deleteVideofile = fileUrl => {
+  const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_PRIVATE_KEY,
+    region: "ap-northeast-1"
+  });
+
+  const filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+
+  var params = {
+    Bucket: "j-tube/video",
+    Key: filename
+  };
+
+  s3.deleteObject(params, function(err, data) {
+    if (err) console.log(err, err.stack);
+    // an error occurred
+    else {
+      console.log(data);
+    } // successful response
+    /*
+     data = {
+     }
+     */
+  });
+};
+
 export const deleteVideo = async (req, res) => {
   const {
     params: { id }
@@ -124,9 +151,12 @@ export const deleteVideo = async (req, res) => {
       throw Error();
     } else {
       await Video.findOneAndRemove({ _id: id });
+      await deleteVideofile(video.fileUrl);
+      req.flash("info", "Video file was deleted!");
     }
   } catch (error) {
     console.log(error);
+    req.flash("error", "error : file deletion");
   }
   res.redirect(routes.home);
 };

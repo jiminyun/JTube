@@ -140,20 +140,21 @@ export const getEditProfile = (req, res) =>
 export const postEditProfile = async (req, res) => {
   const {
     body: { name, email },
-    file
+    file: { location }
   } = req;
 
   try {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl
+      avatarUrl: location ? location : req.user.avatarUrl
     });
     req.flash("success", "Profile updated");
     res.redirect(routes.me);
   } catch (error) {
+    console.log(error);
     req.flash("error", "Can't update profile");
-    res.redirect(routes.editProfile);
+    res.redirect(`/users${routes.editProfile}`);
   }
 };
 

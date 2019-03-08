@@ -568,7 +568,7 @@ input {
        -o-animation: flashAnimation 2s ease-in-out forwards;
           animation: flashAnimation 2s ease-in-out forwards; }
   .flash-message__container.error {
-    background-color: #e74c3c; }
+    background-color: #f45942; }
   .flash-message__container.success {
     background-color: #2ecc71; }
   .flash-message__container.info {
@@ -707,7 +707,7 @@ input {
      -moz-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 60px; }
+  margin-top: 150px; }
   .user-profile .user-profile__header {
     display: -webkit-box;
     display: -webkit-flex;
