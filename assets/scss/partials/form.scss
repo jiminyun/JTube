@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 80px;
   form {
     width: 100%;
     max-width: 320px;
@@ -21,6 +22,8 @@
     textarea {
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       margin-bottom: 25px;
+      width: 100%;
+      font-size: 16px;
     }
     input[type="submit"] {
       background-color: #3498db;
@@ -37,5 +40,4 @@
       margin-right: 10px;
     }
   }
-
 }

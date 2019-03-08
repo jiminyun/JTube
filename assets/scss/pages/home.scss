@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(6, minmax(150px, 1fr));
   grid-gap: 30px;
+  margin-top: 80px;
   .videoBlock:first-child,
   .videoBlock:nth-child(2) {
     grid-column: span 3;

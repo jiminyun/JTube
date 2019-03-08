@@ -1,8 +1,12 @@
 .header {
   background-color: $red;
   margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
   .header__wrapper {
-    padding: 5px 0px;
+    padding: 5px 10px;
     width: 100%;
     margin: 0 auto;
     max-width: 1200px;
@@ -10,7 +14,8 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     .header__column {
-      i {
+      i,
+      .logo {
         color: white;
         font-size: 40px;
       }

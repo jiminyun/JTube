@@ -12,6 +12,7 @@ export const postJoin = async (req, res, next) => {
   } = req;
 
   if (password !== password2) {
+    req.flash("error", "Passwords don't match");
     res.status(400);
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -24,16 +25,19 @@ export const postJoin = async (req, res, next) => {
       next();
     } catch (error) {
       console.log(error);
-      //res.redirect(routes.home);
+      res.redirect(routes.home);
     }
   }
 };
 
 export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Log In" });
+
 export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
-  successRedirect: routes.home
+  successRedirect: routes.home,
+  successFlash: "Welcome",
+  failureFlash: "Can't log in. Check email and/or password"
 });
 
 //GithubLogin
@@ -109,6 +113,7 @@ export const getMe = async (req, res) => {
 };
 
 export const logout = (req, res) => {
+  req.flash("info", "Logged out, see you later");
   req.logout();
   res.redirect(routes.home);
 };
@@ -124,6 +129,7 @@ export const userDetail = async (req, res) => {
     console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
+    req.flash("error", "User not found");
     res.redirect(routes.home);
   }
 };
@@ -143,8 +149,10 @@ export const postEditProfile = async (req, res) => {
       email,
       avatarUrl: file ? file.path : req.user.avatarUrl
     });
+    req.flash("success", "Profile updated");
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "Can't update profile");
     res.redirect(routes.editProfile);
   }
 };
@@ -157,6 +165,7 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPassword1) {
+      req.flash("error", "Can't change password");
       res.status(400);
       res.redirect(`/users/${routes.changePassword}`);
     }
