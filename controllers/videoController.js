@@ -3,6 +3,13 @@ import Comment from "../models/Comment";
 import User from "../models/User";
 import routes from "../routes";
 import aws from "aws-sdk";
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_KEY,
+  secretAccessKey: process.env.AWS_PRIVATE_KEY,
+  region: "ca-central-1"
+});
+
 // Home
 
 export const home = async (req, res) => {
@@ -115,12 +122,6 @@ export const postEditVideo = async (req, res) => {
 };
 
 export const deleteVideofile = fileUrl => {
-  const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_PRIVATE_KEY,
-    region: "ap-northeast-1"
-  });
-
   const filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
 
   var params = {
@@ -196,7 +197,7 @@ export const postAddComment = async (req, res) => {
     });
     video.comments.push(newComment.id);
     video.save();
-    res.send({ id: newComment.id, name: user.name });
+    res.send({ id: newComment.id, name: user.name, avatar: user.avatarUrl });
   } catch (error) {
     console.log(error);
     res.status(400);

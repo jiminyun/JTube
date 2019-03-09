@@ -13,11 +13,12 @@ const setNumber = mod => {
   commentNumber.innerHTML = newNumber;
 };
 
-const addComment = (comment, commentId, creatorName) => {
+const addComment = (comment, commentId, creatorName, avatar) => {
   const li = document.createElement("li");
   const span_name = document.createElement("span");
   const span_comment = document.createElement("span");
   const button = document.createElement("button");
+  const image = document.createElement("img");
   button.innerHTML = "Delete";
   button.id = commentId;
   button.className = "jsDeleteComment";
@@ -25,6 +26,10 @@ const addComment = (comment, commentId, creatorName) => {
   span_comment.className = "comment";
   span_name.innerHTML = creatorName;
   span_comment.innerHTML = comment;
+  image.className = "avatar";
+  image.src = avatar;
+
+  li.appendChild(image);
   li.appendChild(span_name);
   li.appendChild(span_comment);
   li.appendChild(button);
@@ -50,9 +55,9 @@ const sendComment = async comment => {
   });
   if (response.status === 200) {
     const {
-      data: { id, name }
+      data: { id, name, avatar }
     } = response;
-    addComment(comment, id, name);
+    addComment(comment, id, name, avatar);
   }
 };
 
