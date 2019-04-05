@@ -34,7 +34,7 @@ export const localMiddleware = (req, res, next) => {
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || null;
   res.locals.id = -1;
-  //console.log("user", req.user);
+  console.log("user", req.user);
   next();
 };
 

@@ -37,4 +37,5 @@ passport.use(
 );
 
 passport.serializeUser(User.serializeUser());
+//console.log(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
