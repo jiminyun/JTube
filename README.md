@@ -36,11 +36,9 @@ https://www.youtube.com/watch?v=lD-jtnAyJI8
 ## Deploy
 
 https://fierce-reef-79253.herokuapp.com/
-Heroku
 
-```
-npm start
-```
+- Heroku
+- AWS S3
 
 ## Pages:
 
