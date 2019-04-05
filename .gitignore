@@ -65,3 +65,5 @@ typings/
 package-lock.json
 videos
 static
+build
+uploads

@@ -14,8 +14,6 @@
   },
   "homepage": "https://github.com/jiminyun/JTube#readme",
   "dependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/node": "^7.2.2",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "acorn-jsx": "^5.0.1",
@@ -52,11 +50,19 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' ",
-    "dev:assets": "WEBPACK_ENV=development webpack -w",
-    "build:assets": "WEBPACK_ENV=production webpack"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "tunnel": "lt --port 4000",
+    "start": "node build/init.js"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "jest": "^24.7.1",
+    "nodemon": "^1.18.10",
+    "regenerator-runtime": "^0.13.2"
   }
 }

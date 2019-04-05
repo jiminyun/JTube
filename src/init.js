@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import "./config";
 import "./db";
 import app from "./app";
