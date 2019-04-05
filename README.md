@@ -23,8 +23,8 @@ Cloning YouTube with Vanilla javascript and Nodejs
 git clone https://github.com/jiminyun/JTube
 npm install
 
-yarn dev:server
-yarn dev:assets
+npm dev:server
+npm dev:assets
 ```
 
 ## Demo
@@ -32,6 +32,15 @@ yarn dev:assets
 https://www.youtube.com/watch?v=lD-jtnAyJI8
 
 [![Watch the video](https://img.youtube.com/vi/lD-jtnAyJI8/maxresdefault.jpg)](https://youtu.be/lD-jtnAyJI8)
+
+## Deploy
+
+https://fierce-reef-79253.herokuapp.com/
+Heroku
+
+```
+npm start
+```
 
 ## Pages:
 
