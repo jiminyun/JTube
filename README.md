@@ -29,9 +29,9 @@ npm dev:assets
 
 ## Demo
 
-https://www.youtube.com/watch?v=lD-jtnAyJI8
+https://www.youtube.com/watch?v=22CahynVQIg
 
-[![Watch the video](https://img.youtube.com/vi/lD-jtnAyJI8/maxresdefault.jpg)](https://youtu.be/lD-jtnAyJI8)
+[![Watch the video](https://img.youtube.com/vi/22CahynVQIg/maxresdefault.jpg)](https://youtu.be/22CahynVQIg)
 
 ## Deploy
 
