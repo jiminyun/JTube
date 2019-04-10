@@ -37,8 +37,8 @@ https://www.youtube.com/watch?v=22CahynVQIg
 
 https://fierce-reef-79253.herokuapp.com/
 
-- Heroku
-- AWS S3
+- Heroku : heroku sleeps after 30 mins of inactivity, so please a little bit wait until the website opens
+- AWS S3 : file upload
 
 ## Pages:
 
